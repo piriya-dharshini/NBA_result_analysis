@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Result analyzer</title>
+    {% load static %}
+    <link rel="icon" type="image/jpg" href="{% static 'img/ssnmiddlelogo.png' %}"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/upload.css' %}"></link>
+    <script src="{% static 'css/main.js' %}"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"></link>
+  </head>
+  <body>
+    <div class="titlebar">
+      <img src="/static/img/ssn_logo.png" class="logo">
+      <ul>
+       <li><a href="{% url 'upload' %}" style="color:#00ccff">UPLOAD</a></li>
+       <li><a href="{% url 'result_data' %}">RESULT DATA</a></li>
+       <li><a href="{% url 'grade_analysis' %}">GRADE ANALYSIS</a></li>
+       <li><a href="{% url 'summary' %}">RESULT SUMMARY</a></li>
+       <li><a href="{% url 'download_excel' %}">DOWNLOAD EXCEL</a></li>
+      </ul>
+     </div>
+     <div class="background">
+        <form>
+            <h1>DATA HAS BEEN UPLOADED ALREADY</h1>
+        </form>
+        
+     </div>
+
+    </body>
+    </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grades Analysis</title>
+  {% load static %}
+  <link rel="icon" type="image/jpg" href="{% static 'img/ssnmiddlelogo.png' %}"></link>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/subjsum.css' %}">
+  <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"></link>
+</head>
+<body>
+  <div class="titlebar">
+    <img src="/static/img/ssn_logo.png" class="logo">
+    <ul>
+     <li><a href="{% url 'upload' %}">UPLOAD</a></li>
+     <li><a href="{% url 'result_data' %}">RESULT DATA</a></li>
+     <li><a href="{% url 'grade_analysis' %}">GRADE ANALYSIS</a></li>
+     <li><a href="{% url 'summary' %}" style="color:#00ccff">RESULT SUMMARY</a></li>
+     <li><a href="{% url 'download_excel' %}">DOWNLOAD EXCEL</a></li>
+    </ul>
+   </div>
+   <div class="background"> 
+    <form method="POST" action="{% url 'subject_summary' %}" class="form_submit">
+      {% csrf_token %} 
+      <label for="batchYear">BATCH YEAR:</label>
+          <select name="batchYear" id="batchYear">
+              <option value="" disabled selected>SELECT BATCH YEAR</option>
+              {% for batch, semesters in batch_semesters.items %}
+                  <option value="{{ batch }}">{{ batch }}</option>
+              {% endfor %}
+          </select>
+
+      <label for="semester">SEMESTER:</label>
+          <select name="semester" id="semester">
+              <option value="" disabled selected>SELECT SEMESTER</option>
+          </select>
+          <h1 id="highlight" style="font-size:20px;font-family:poppins;display: none;">BATCH: {{batch}} SEMESTER: {{sem}}
+          </h1>
+    <input type="submit" id="hiddenSubmit" style="display:none;">
+    </form>
+    {% if res %}
+    <table class="center"> 
+      <thead> 
+        <tr class="fix">
+          {% for item in col %}
+          <th>{{ item }}</th>
+          {% endfor %}
+        </tr>
+      </thead> 
+      <tbody id="result_table">  
+      {% for item in res %} 
+        <tr> 
+          <td>{{ item.0 }}</td> 
+          <td>{{ item.1 }}</td> 
+          <td>{{ item.2 }}</td>
+          <td>{{ item.3 }}</td> 
+          <td>{{ item.4 }}</td> 
+          <td>{{ item.5 }}</td> 
+          <td>{{ item.6 }}</td> 
+          <td>{{ item.7 }}</td> 
+          <td>{{ item.8 }}</td>
+          <td>{{ item.9 }}</td> 
+          <td>{{ item.10 }}</td> 
+          <td>{{ item.11 }}</td> 
+          <td>{{ item.12 }}</td> 
+          <td>{{ item.13 }}</td> 
+          <td>{{ item.14 }}</td> 
+          <td>{{ item.15 }}</td> 
+        </tr> 
+      {% endfor %} 
+      </tbody>
+    </table>
+
+    <br /><br />
+    <a href="{% url 'visualize_ss' %}" target="_blank"><button class="button1">Visualize in Bar Graph</button></a>
+    <br /><br /><br />
+    {% endif %}
+
+    <script>
+      document.getElementById('semester').addEventListener('change', function() {
+          document.getElementById('hiddenSubmit').click(); // Simulate form submission
+      });
+
+      const tableRowCount = document.getElementById('result_table')?.children.length 
+          
+          if(tableRowCount > 1){
+            document.getElementById('highlight').style.display='block'
+          }
+
+      document.getElementById("batchYear").addEventListener('change', function(){
+        const selectedBatch = document.getElementById("batchYear").value;
+        const semBatch = document.getElementById('semester');
+        let option;
+
+        while (semBatch.options.length > 0) {
+            semBatch.remove(0);
+        }
+
+        {% for key, value in batch_semesters.items %}
+          if (selectedBatch == '{{ key }}'){
+            {% for sem in value %}
+            option = document.createElement("option");
+            option.value = '{{ sem }}';
+            option.textContent = '{{ sem }}';
+            semBatch.appendChild(option);
+            {% endfor %}
+          }
+        {% endfor %}
+      });
+    </script>
+  </div>
+</body>
+</html>

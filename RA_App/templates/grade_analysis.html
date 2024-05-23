@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Result analyzer</title>
+    {% load static %}
+    <link rel="icon" type="image/jpg" href="{% static 'img/ssnmiddlelogo.png' %}"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/grade_analysis.css' %}"></link>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"></link>
+  </head>
+  <body>
+    <div class="titlebar">
+      <img src="/static/img/ssn_logo.png" class="logo">
+      <ul>
+       <li><a href="{% url 'upload' %}">UPLOAD</a></li>
+       <li><a href="{% url 'result_data' %}">RESULT DATA</a></li>
+       <li><a href="{% url 'grade_analysis' %}" style="color:#00ccff">GRADE ANALYSIS</a></li>
+       <li><a href="{% url 'summary' %}">RESULT SUMMARY</a></li>
+       <li><a href="{% url 'download_excel' %}">DOWNLOAD EXCEL</a></li>
+      </ul>
+     </div>
+     <div class="background"> 
+      <form method="POST" action="{% url 'grade_analysis' %}" class="form_submit">
+        {% csrf_token %} 
+        <label for="batchYear">BATCH YEAR:</label>
+            <select name="batchYear" id="batchYear">
+                <option value="" disabled selected>SELECT BATCH YEAR</option>
+                {% for batch, semesters in batch_semesters.items %}
+                    <option value="{{ batch }}">{{ batch }}</option>
+                {% endfor %}
+            </select>
+
+        <label for="semester">SEMESTER:</label>
+            <select name="semester" id="semester">
+                <option value="" disabled selected>SELECT SEMESTER</option>
+            </select>
+            <h1 id="highlight" style="font-size:20px;font-family:poppins;display: none;">BATCH: {{batch}} SEMESTER: {{sem}}
+            </h1>
+
+      <input type="submit" id="hiddenSubmit" style="display:none;">
+      </form>
+
+      <table class="center"> 
+        <thead> 
+          <tr class="fix">
+            {% for item in col1 %}
+            <th rowspan="2">{{ item }}</th>
+            {% endfor %}
+            {% for item in col2 %}
+            <th colspan="10" style="text-align: center">{{ item }}</th>
+            {% endfor %}
+            {% for item in col3 %}
+            <th colspan="6" style="text-align: center">{{ item }}</th>
+            {% endfor %}
+          </tr>
+          <tr>
+            {% for item in col4 %}
+            <th>{{ item }}</th> 
+            {% endfor %}
+          </tr> 
+        </thead> 
+        <tbody id="result_table"> 
+        {% for item in data %} 
+          <tr> 
+            <td>{{ item.sno }}</td> 
+            <td>{{ item.regno }}</td> 
+            <td>{{ item.name }}</td> 
+            <td>{{ item.O }}</td> 
+            <td>{{ item.APlus }}</td> 
+            <td>{{ item.A }}</td> 
+            <td>{{ item.BPlus }}</td> 
+            <td>{{ item.B }}</td> 
+            <td>{{ item.C }}</td> 
+            <td>{{ item.RA }}</td> 
+            <td>{{ item.AB }}</td> 
+            <td>{{ item.WH }}</td>
+            <td>{{ item.SA }}</td> 
+            <td>{{ item.grade_point }}</td>
+            <td>{{ item.gpa }}</td> 
+            <td>{{ item.cgpa }}</td> 
+            <td>{{ item.deviation }}</td> 
+            <td>{{ item.status }}</td> 
+            <td>{{ item.rank }}</td> 
+          </tr> 
+        {% endfor %} 
+        </tbody> 
+        <script>
+          document.getElementById('semester').addEventListener('change', function() {
+              document.getElementById('hiddenSubmit').click(); // Simulate form submission
+          });
+          
+          const tableRowCount = document.getElementById('result_table')?.children.length 
+          
+          if(tableRowCount > 1){
+            document.getElementById('highlight').style.display='block'
+          }
+          
+          document.getElementById("batchYear").addEventListener('change', function(){
+        const selectedBatch = document.getElementById("batchYear").value;
+        const semBatch = document.getElementById('semester');
+        let option;
+
+        while (semBatch.options.length > 0) {
+                semBatch.remove(0);
+            }
+
+        {% for key, value in batch_semesters.items %}
+          if (selectedBatch == '{{ key }}'){
+            {% for sem in value %}
+            option = document.createElement("option");
+            option.value = '{{ sem }}';
+            option.textContent = '{{ sem }}';
+            semBatch.appendChild(option);
+            {% endfor %}
+          }
+        {% endfor %}
+    });
+      </script>
+      </table> 
+    </section>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Overall Summary</title>
+    {% load static %}
+    <link rel="icon" type="image/jpg" href="{% static 'img/ssnmiddlelogo.png' %}"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/Overall_Summary.css' %}"></link>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"></link>
+  </head>
+
+  <body>
+    <div class="titlebar">
+      <img src="/static/img/ssn_logo.png" class="logo">
+      <ul>
+       <li><a href="{% url 'upload' %}">UPLOAD</a></li>
+       <li><a href="{% url 'result_data' %}">RESULT DATA</a></li>
+       <li><a href="{% url 'grade_analysis' %}">GRADE ANALYSIS</a></li>
+       <li><a href="{% url 'summary' %}">RESULT SUMMARY</a></li>
+       <li><a href="{% url 'download_excel' %}">DOWNLOAD EXCEL</a></li>
+      </ul>
+    </div>
+
+    <div class="background">
+      <form method="POST" action="{% url 'overall_summary' %}" class="form_submit">
+        {% csrf_token %} 
+        <label for="batchYear">BATCH YEAR:</label>
+        <select name="batchYear" id="batchYear">
+            <option value="" disabled selected>SELECT BATCH YEAR</option>
+            {% for batch, semesters in batch_semesters.items %}
+                <option value="{{ batch }}">{{ batch }}</option>
+            {% endfor %}
+        </select>
+
+          <label for="semester">SEMESTER:</label>
+              <select name="semester" id="semester">
+                  <option value="" disabled selected>SELECT SEMESTER</option>
+              </select>
+              <h1 id="highlight" style="font-size:20px;font-family:poppins;display: none;">BATCH: {{batch}} SEMESTER: {{sem}}
+              </h1>
+        <input type="submit" id="hiddenSubmit" style="display:none;">
+      </form>
+    {% for item in data %}
+    <h2>STUDENT STRENGTH STATISTICS</h2>
+    <br />
+    <table>
+      <thead>
+      <tr>
+        <th>CATEGORY</th>
+        <th>STRENGTH</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>ALL CLEAR</td>
+        <td>{{item.Pass_no}}</td>
+      </tr>
+      <tr>
+        <td>REAPPEAR</td>
+        <td>{{item.Arrear_no}}</td>
+      </tr>
+      <tr>
+        <td>ABSENT</td>
+        <td>{{item.Absent_no}}</td>
+      </tr>
+      <tr>
+        <td>TOTAL</td>
+        <td>{{item.Reg_no}}</td>
+      </tr>
+      <tr>
+        <td>OVERALL CLEAR %</td>
+        <td>{{item.Pass_per}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <script>
+      document.getElementById('selectOption').addEventListener('change', function() {
+          document.getElementById('hiddenSubmit').click(); // Simulate form submission
+      });
+    </script>
+    </table>
+
+    <br /><br /><br />
+
+    {% for item in data %}
+    <h2>STATISTICS</h2>
+    <br />
+    <table>
+      <thead>
+      <tr>
+        <th>CATEGORY</th>
+        <th>STATISTICS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MEAN GPA</td>
+        <td>{{item.Mean_gpa}}</td>
+      </tr>
+      <tr>
+        <td>STANDARD DEVIATION</td>
+        <td>{{item.Std_dev}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <script>
+      document.getElementById('selectOption').addEventListener('change', function() {
+          document.getElementById('hiddenSubmit').click(); // Simulate form submission
+      });
+    </script>
+    </table>
+
+    <br /><br /><br />
+
+    {% for item in data %}
+    <h2>GPA CLASSIFICATION</h2>
+    <br />
+    <table>
+      <thead>
+      <tr>
+        <th>GPA RANGE</th>
+        <th>NO. OF STUDENTS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GREATER THAN 9</td>
+        <td>{{item.A_9}}</td>
+      </tr>
+      <tr>
+        <td>GREATER THAN 8.5</td>
+        <td>{{item.A_8_5}}</td>
+      </tr>
+      <tr>
+        <td>GREATER THAN 8</td>
+        <td>{{item.A_8}}</td>
+      </tr>
+      <tr>
+        <td>GREATER THAN 7.5</td>
+        <td>{{item.A_7_5}}</td>
+      </tr>
+      <tr>
+        <td>GREATER THAN 6</td>
+        <td>{{item.A_6}}</td>
+      </tr>
+      
+    </tbody>
+    <script>
+      document.getElementById('selectOption').addEventListener('change', function() {
+          document.getElementById('hiddenSubmit').click(); // Simulate form submission
+      });
+    </script>
+    </table>
+
+    <br /><br />
+    <a href="{% url 'visualize_os' %}" target="_blank"><button class="button1">Visualize in Pie Chart</button></a>
+    {% endfor %}
+    <br /><br /><br />
+
+
+    {% for item in data %}
+    <h2>REAPPEAR CLASSIFICATION</h2>
+    <br />
+    <table>
+      <thead>
+      <tr>
+        <th>COURSE NO</th>
+        <th>NO. OF STUDENTS</th>
+      </tr>
+    </thead>
+    <tbody id="result_table">
+      <tr>
+        <td>1 COURSE</td>
+        <td>{{item.RA_1}}</td>
+      </tr>
+      <tr>
+        <td>2 COURSES</td>
+        <td>{{item.RA_2}}</td>
+      </tr>
+      <tr>
+        <td>3 COURSES</td>
+        <td>{{item.RA_3}}</td>
+      </tr>
+      <tr>
+        <td>4 COURSES</td>
+        <td>{{item.RA_4}}</td>
+      </tr>
+      <tr>
+        <td>5 COURSES</td>
+        <td>{{item.RA_5}}</td>
+      </tr>
+      <tr>
+        <td>6 COURSES</td>
+        <td>{{item.RA_6}}</td>
+      </tr>
+      <tr>
+        <td>7 COURSES</td>
+        <td>{{item.RA_7}}</td>
+      </tr>
+      <tr>
+        <td>8 COURSES</td>
+        <td>{{item.RA_8}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <script>
+      document.getElementById('semester').addEventListener('change', function() {
+          document.getElementById('hiddenSubmit').click(); // Simulate form submission
+      });
+
+      const tableRowCount = document.getElementById('result_table')?.children.length 
+          
+          if(tableRowCount > 1){
+            document.getElementById('highlight').style.display='block'
+          }
+
+      document.getElementById("batchYear").addEventListener('change', function(){
+    const selectedBatch = document.getElementById("batchYear").value;
+    const semBatch = document.getElementById('semester');
+    let option;
+
+    while (semBatch.options.length > 0) {
+            semBatch.remove(0);
+        }
+
+    {% for key, value in batch_semesters.items %}
+      if (selectedBatch == '{{ key }}'){
+        {% for sem in value %}
+        option = document.createElement("option");
+        option.value = '{{ sem }}';
+        option.textContent = '{{ sem }}';
+        semBatch.appendChild(option);
+        {% endfor %}
+      }
+    {% endfor %}
+});
+  </script>
+    </table>
+
+    <br /><br /><br /><br /><br /><br />
+  </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Result analyzer</title>
+    {% load static %}
+    <link rel="icon" type="image/jpg" href="{% static 'img/ssnmiddlelogo.png' %}"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/upload.css' %}"></link>
+    <script src="{% static 'css/main.js' %}"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"></link>
+  </head>
+  <body>
+    <div class="titlebar">
+      <img src="/static/img/ssn_logo.png" class="logo">
+      <ul>
+       <li><a href="{% url 'upload' %}" style="color:#00ccff">UPLOAD</a></li>
+       <li><a href="{% url 'result_data' %}">RESULT DATA</a></li>
+       <li><a href="{% url 'grade_analysis' %}">GRADE ANALYSIS</a></li>
+       <li><a href="{% url 'summary' %}">RESULT SUMMARY</a></li>
+       <li><a href="{% url 'download_excel' %}">DOWNLOAD EXCEL</a></li>
+      </ul>
+     </div>
+    <div class="background">
+      <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data" class="upload-form"> <!-- autocomplete="off" enctype="multipart/form-data" class="upload-form">-->
+        {% csrf_token %}
+        <label for="batchYear">BATCH YEAR:</label>
+            <select name="batchYear" id="batchYear">
+                <option value="" disabled selected>SELECT BATCH YEAR</option>
+                {% for batch in batch_semesters %}
+                    <option value="{{ batch }}">{{ batch }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="semester">SEMESTER:</label>
+            <select name="semester" id="semester">
+                <option value="" disabled selected>SELECT SEMESTER</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+          
+        <label for="status">TYPE OF EXCEL SHEET:</label>
+        <select name="status" id="status">
+          <option value="" disabled selected>SELECT STATUS</option>
+          <option value="beforeReval">BEFORE REVAL</option>
+          <option value="afterReval">AFTER REVAL</option>
+        </select>
+        <div class="upload-div">
+          <input type="file" id="upload" name="upload" style="display:none;">
+          <label for="status" class="status">UPLOAD:</label>
+          <label for="upload" class="upload_label">SELECT FILES</label>
+        </div>
+        <button type="submit" class="submit-button">SUBMIT</button>
+
+      </form>
+  
+  </div>
+</body>
+</html>

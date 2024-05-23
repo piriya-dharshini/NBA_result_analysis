@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  zoom: 75%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+h1 {
+  color: black;
+  text-align: center;
+  font-family: "Times New Roman";
+  font-weight: bold;
+  font-size: 50px;
+}
+.titlebar {
+  height: 10%;
+  width: 100%;
+  margin-top: 0px;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  border-radius: none;
+  z-index: 50;
+}
+
+.titlebar ul li {
+  list-style: none;
+  display: inline-flex;
+  text-align: middle;
+  margin: 0 20px;
+  position: relative;
+}
+
+.titlebar ul li a {
+  text-decoration: none;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 22px;
+  transition: 1s;
+}
+
+.titlebar ul li a:hover {
+  text-decoration: none;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  transition: 1s;
+}
+
+.titlebar ul li::after {
+  content: "";
+  height: 2.5px;
+  width: 0;
+  background: #00ccff;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 1s;
+}
+
+.logo {
+  width: 15%;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5%;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.titlebar ul li:hover::after {
+  width: 100%;
+}
+
+.background {
+  width: auto;
+  height:auto;
+  background: linear-gradient(
+    rgb(225, 241, 251),
+    rgb(225, 241, 251),
+    rgb(225, 241, 251),
+    rgb(225, 241, 251)
+  );
+  padding-top: 10%;
+  padding-bottom: 100vh;
+}
+
+form {
+  margin-top: 5%;
+  margin-left: 40%;
+  width: 300px;
+}
+
+/* CSS for the form container */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* CSS for form labels */
+.upload-form label {
+  margin-bottom: 10px;
+}
+.upload-form select{
+  width: 320px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+/* CSS for input fields */
+.upload-form input[type="text"]{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+/* CSS for file upload section */
+.upload-div {
+  display: flex;
+  align-items: center;
+}
+
+.upload-div input[type="file"] {
+  display: none;
+}
+
+.upload-div .upload_label {
+  margin-right: 10px;
+  width:215px;
+  padding: 8px 12px;
+  background-color: grey;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid black;
+}
+
+/* CSS for submit button */
+.submit-button {
+  width: 100%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 12px 20px;
+  margin-left:10px;
+  position: relative;
+  transition-duration: 0.3s;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-size: large;
+  font-family: "Times New Roman";
+}
+
+.submit-button:hover {
+  background-color: #00ccff;
+  color: black;
+}

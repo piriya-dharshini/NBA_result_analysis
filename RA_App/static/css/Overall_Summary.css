@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  zoom: 75%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.titlebar {
+  height: 10%;
+  width: 100%;
+  margin-top: 0px;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  border-radius: none;
+  z-index: 50;
+}
+
+.titlebar ul li {
+  list-style: none;
+  display: inline-flex;
+  text-align: middle;
+  margin: 0 20px;
+  position: relative;
+}
+
+.titlebar ul li a {
+  text-decoration: none;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 22px;
+  transition: 1s;
+}
+
+.titlebar ul li a:hover {
+  text-decoration: none;
+  font-family: "Calibri";
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  transition: 1s;
+}
+
+.titlebar ul li::after {
+  content: "";
+  height: 2.5px;
+  width: 0;
+  background: #00ccff;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 1s;
+}
+
+.logo {
+  width: 15%;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5%;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.titlebar ul li:hover::after {
+  width: 100%;
+}
+
+.background {
+  width: auto;
+  height: auto;
+  background: linear-gradient(
+    rgb(225, 241, 251),
+    rgb(225, 241, 251),
+    rgb(225, 241, 251),
+    rgb(225, 241, 251)
+  );
+  padding-top: 10%;
+  padding-bottom: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  position: relative;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px dashed #000000;
+  border-left: 2px dashed #000000;
+  border-right: 2px dashed #000000;
+  border-top: 2px dashed #000000;
+}
+
+thead {
+  background-color: #ffffff;
+  position: relative;
+}
+
+tbody tr:hover {
+  background-color: #ffffff;
+  position: relative;
+}
+
+.form_submit {
+  margin: 0 auto; /* Center the form horizontally */
+  max-width: 400px; /* Optional: set a maximum width for the form */
+  text-align: center;
+  margin-bottom: 2%; /* Add some margin below the form */
+}
+
+/* Style the select element */
+#batchYear,
+#semester {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* Style the options */
+#batchYear option,
+#semester option {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Style the hover effect of options */
+#batchYear option:hover,
+#semester option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Style the selected option */
+#batchYear option:checked,
+#semester option:checked {
+  background-color: #ddd;
+}
+
+table {
+  border: 1px solid;
+  border-radius: 10px;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 0;
+}
+
+th,
+td {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-collapse: collapse;
+  position: relative;
+}
+
+th {
+  background-color: white;
+  color: black;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+  font-family: "Times New Roman";
+  font-weight: bold;
+  font-size: 50px;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+  font-family: "Times New Roman";
+}
+
+.button1 {
+  width:300px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  left: 43%;
+  transition-duration: 0.3s;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-size: large;
+  font-family: "Times New Roman";
+}
+
+.button1:hover {
+  background-color: rgba(7, 41, 232, 0.849);
+  color: white;
+}
+
+.bg {
+  color: white;
+}
