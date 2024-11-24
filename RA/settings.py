@@ -84,8 +84,8 @@ WSGI_APPLICATION = 'RA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'pdk164@#',
+        'USER': 'ur username',
+        'PASSWORD': 'ur password',
         'HOST': 'localhost',
         'NAME': 'Result_analysis'
     }
