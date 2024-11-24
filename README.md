@@ -2,6 +2,8 @@
 
 A result analysis web application developed for the department of Information Technology for SSNCE
 
+![Uploading Screenshot 2024-11-24 193256.png…]()
+
 - Upload Excel
 - Result of each student of the department
 - Grade analysis of each student
