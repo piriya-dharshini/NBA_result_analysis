@@ -1,5 +1,7 @@
 # Project Overview
 
+A result analysis web application developed for the department of Information Technology for SSNCE
+
 - Upload Excel
 - Result of each student of the department
 - Grade analysis of each student
