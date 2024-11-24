@@ -1,9 +1,7 @@
 # Project Overview
-
-![Screenshot 2024-11-24 193256](https://github.com/user-attachments/assets/6fccba4b-d470-4acd-bcad-9fe549968763)
-
 A result analysis web application developed for the department of Information Technology for SSNCE
 
+![Screenshot 2024-11-24 193256](https://github.com/user-attachments/assets/6fccba4b-d470-4acd-bcad-9fe549968763)
 
 - Upload Excel
 - Result of each student of the department
