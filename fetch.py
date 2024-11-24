@@ -10,8 +10,8 @@ from summary import *
 import mysql.connector
 mydb = mysql.connector.connect(
    host =  "localhost",
-   user = "ra",
-   password = "1234",
+   user = "root",
+   password = "pdk164@#",
    database = "Result_Analysis"
 )
 
